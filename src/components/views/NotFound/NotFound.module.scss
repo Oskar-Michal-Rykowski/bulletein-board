@@ -1,4 +1,13 @@
-@import '../../../styles/settings.scss';
+@import "../../../styles/settings.scss";
 
-// .root {
-// }
+.panel {
+  width: 30%;
+  height: 170px;
+  margin: auto;
+  padding-top: 45px;
+}
+
+.title {
+  text-align: center;
+  margin: auto;
+}

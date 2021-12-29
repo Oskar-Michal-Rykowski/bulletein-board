@@ -1,4 +1,23 @@
-@import '../../../styles/settings.scss';
+@import "../../../styles/settings.scss";
 
-// .root {
-// }
+.panel {
+  width: 30%;
+  height: 170px;
+  margin: auto;
+}
+
+.title {
+  text-align: center;
+  margin: auto;
+}
+
+.google {
+  background: red;
+  color: white;
+  font-size: 20px;
+  margin: auto;
+}
+
+.google:hover {
+  background: gray;
+}
