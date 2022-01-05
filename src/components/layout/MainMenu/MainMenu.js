@@ -1,20 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {
-  Button,
-  Collapse,
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
-  Nav,
-  NavItem,
-  NavLink,
-} from "reactstrap";
-import Typography from "@material-ui/core/Typography";
-import Breadcrumbs from "@material-ui/core/Breadcrumbs";
-import Link from "@material-ui/core/Link";
 
-import clsx from "clsx";
+import Breadcrumbs from "@material-ui/core/Breadcrumbs";
 
 import { connect } from "react-redux";
 import { getUser } from "../../../redux/userRedux";
@@ -23,29 +10,23 @@ import { getUser } from "../../../redux/userRedux";
 // import { reduxSelector, reduxActionCreator } from '../../../redux/exampleRedux.js';
 
 import styles from "./MainMenu.module.scss";
+import { Link } from "react-router-dom";
 
 const Component = ({ className, children, user }) => (
   <div className={styles.header}>
-    {/* <Navbar > */}
-    <NavbarBrand className={styles.brand} href="/">
+    <Link className={styles.brand} to="/">
       Bulletein App
-    </NavbarBrand>
+    </Link>
     <Breadcrumbs className={styles.menu} aria-label="breadcrumb">
-      <Link color="inherit" href="/">
-        Home
-      </Link>
-      <Link color="inherit" href="/login">
-        Profile
-      </Link>
+      <Link to="/">Home</Link>
+      <Link to="/login">Profile</Link>
+
       {user === "logged" ? (
-        <Link color="inherit">Logout</Link>
+        <Link to="/">Logout</Link>
       ) : (
-        <Link href="/login" color="inherit">
-          Login
-        </Link>
+        <Link to="/login">Login</Link>
       )}
     </Breadcrumbs>
-    {/* </Navbar> */}
   </div>
 );
 
@@ -66,4 +47,4 @@ const mapDispatchToProps = (dispatch) => ({
 // const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
 const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
 
-export { Container as MainMenu };
+export { Container as MainMenu, Component as MainMenuComponent };

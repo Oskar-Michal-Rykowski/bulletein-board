@@ -1,15 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 import TextField from "@material-ui/core/TextField";
-import clsx from "clsx";
 import Container from "@material-ui/core/Container";
 import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 import FormControl from "@material-ui/core/FormControl";
 import Button from "@material-ui/core/Button";
 
-// import { connect } from 'react-redux';
-// import { reduxSelector, reduxActionCreator } from '../../../redux/exampleRedux.js';
 import { connect } from "react-redux";
 import { addPost } from "../../../redux/postsRedux";
 
@@ -18,10 +15,13 @@ import styles from "./PostAdd.module.scss";
 class Component extends React.Component {
   state = {
     newPost: {
+      id: "5",
       title: "",
+      author: "Oskar",
       description: "",
       status: "",
-      publicationDate: new Date(),
+      publicationDate: "05.01.2022",
+      actualizationDate: "06.01.2022",
     },
   };
 
@@ -37,6 +37,7 @@ class Component extends React.Component {
     const { newPost } = this.state;
     e.preventDefault();
     addPost(newPost);
+    alert("Success!");
   };
 
   render() {

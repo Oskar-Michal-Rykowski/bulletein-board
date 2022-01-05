@@ -11,10 +11,10 @@ import { connect } from "react-redux";
 import { getUser } from "../../../redux/userRedux";
 
 import styles from "./Header.module.scss";
+import { Link } from "react-router-dom";
 
-const Component = ({ className, children, user }) => (
+const Component = ({ className, user }) => (
   <div className={clsx(className, styles.root)}>
-    <h2>Header</h2>
     <Card className={styles.panel}>
       <CardContent>
         <Typography className={styles.title} variant="h5" component="h2">
@@ -24,10 +24,11 @@ const Component = ({ className, children, user }) => (
       {user === "logged" ? (
         <div>
           <Typography className={styles.articles} variant="h5" component="h2">
-            <a href="/">See your articles</a>
+            <Link to="/"> See your articles </Link>
           </Typography>
+
           <Typography className={styles.logout} variant="h5" component="h2">
-            <a href="/">Logout</a>
+            <Link to="/">Logout</Link>
           </Typography>
         </div>
       ) : (

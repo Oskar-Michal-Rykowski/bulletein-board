@@ -20,10 +20,10 @@ const Component = ({ className, children, user, posts }) => {
   const url = window.location.href;
   const urlElements = url.split("/");
   const id = urlElements[urlElements.length - 2];
-  console.log("id", id);
-  const post = posts.filter((article) => article.id == id)[0];
-  console.log("post", post);
-  console.log("pos.statust", post.status);
+  // console.log("id", id);
+  const post = posts.filter((article) => article.id === id)[0];
+  // console.log("post", post);
+  // console.log("pos.statust", post.status);
   const [selection, setSelection] = React.useState(post.status);
 
   const handleChange = (event) => {

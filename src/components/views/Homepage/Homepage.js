@@ -13,16 +13,15 @@ import { getUser } from "../../../redux/userRedux";
 import { getAll } from "../../../redux/postsRedux";
 
 import styles from "./Homepage.module.scss";
+import { Link } from "react-router-dom";
 
 const Component = ({ className, children, user, posts }) => (
   <div className={clsx(className, styles.root)}>
     <Container maxWidth="sm">
-      <h2>Homepage</h2>
-      {children}
       {user === "logged" ? (
         <div className={styles.head}>
-          <Button href="/post/add" className={styles.button}>
-            Add New Post
+          <Button className={styles.button}>
+            <Link to="/post/add">Add New Post</Link>
           </Button>
         </div>
       ) : (
@@ -41,12 +40,8 @@ const Component = ({ className, children, user, posts }) => (
               <Typography className={styles.date}>
                 Publication date: {post.publicationDate}
               </Typography>
-              <Button
-                href={`post/${post.id}`}
-                className={styles.more}
-                size="small"
-              >
-                Learn More
+              <Button className={styles.more} size="small">
+                <Link to={`post/${post.id}`}>Learn More</Link>
               </Button>
             </CardContent>
           </Card>
@@ -61,7 +56,7 @@ Component.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
   user: PropTypes.string,
-  posts: PropTypes.array,
+  posts: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.number)),
 };
 
 const mapStateToProps = (state) => ({
