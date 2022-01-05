@@ -61,7 +61,6 @@ const Component = ({ className, children, user, posts }) => {
             </Card>
           ))}
         </div>
-        ;
       </Container>
     </div>
   );

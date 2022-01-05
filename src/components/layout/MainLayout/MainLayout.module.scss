@@ -2,13 +2,13 @@
 
 .root {
   min-height: 100vh;
-  background: orange;
+  background: $brand-color;
   padding: 1px 20px;
 }
 
 .logo {
   font-style: italic;
-  color: white;
+  color: $light-color;
   font-size: 30px;
   line-height: 20px;
 }

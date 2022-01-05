@@ -12,14 +12,14 @@
 }
 
 .google {
-  background: red;
-  color: white;
+  background: $button-color;
+  color: $light-color;
   font-size: 20px;
   margin: auto;
 }
 
 .google:hover {
-  background: gray;
+  background: $button-hover-color;
 }
 
 .articles,
@@ -27,9 +27,9 @@
   text-align: center;
   a {
     text-decoration: none;
-    color: orange;
+    color: $brand-color;
   }
   a:hover {
-    color: black;
+    color: $dark-color;
   }
 }
