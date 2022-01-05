@@ -15,6 +15,7 @@ import { getUser } from "../../../redux/userRedux";
 import { getAll } from "../../../redux/postsRedux";
 
 import styles from "./Post.module.scss";
+import { Link } from "react-router-dom";
 
 const Component = ({ className, children, user, posts }) => {
   const url = window.location.href;
@@ -48,8 +49,10 @@ const Component = ({ className, children, user, posts }) => {
               Actualization date: {post.actualizationDate}
             </Button>
             {user === "logged" ? (
-              <Button href={`${post.id}/edit`} size="small" color="secondary">
-                EDIT
+              <Button size="small">
+                <Link className={styles.edit} to={`${post.id}/edit`}>
+                  EDIT
+                </Link>
               </Button>
             ) : (
               <div></div>

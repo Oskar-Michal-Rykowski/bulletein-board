@@ -21,7 +21,9 @@ const Component = ({ className, children, user, posts }) => (
       {user === "logged" ? (
         <div className={styles.head}>
           <Button className={styles.button}>
-            <Link to="/post/add">Add New Post</Link>
+            <Link className={styles.link} to="/post/add">
+              Add New Post
+            </Link>
           </Button>
         </div>
       ) : (
@@ -41,7 +43,9 @@ const Component = ({ className, children, user, posts }) => (
                 Publication date: {post.publicationDate}
               </Typography>
               <Button className={styles.more} size="small">
-                <Link to={`post/${post.id}`}>Learn More</Link>
+                <Link className={styles.link} to={`post/${post.id}`}>
+                  Learn More
+                </Link>
               </Button>
             </CardContent>
           </Card>

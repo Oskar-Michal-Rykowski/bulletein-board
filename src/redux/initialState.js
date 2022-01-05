@@ -37,5 +37,5 @@ export const initialState = {
       error: false,
     },
   },
-  user: "logged",
+  user: "logout",
 };

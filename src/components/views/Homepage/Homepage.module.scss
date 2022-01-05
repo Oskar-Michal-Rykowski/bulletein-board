@@ -5,10 +5,18 @@
   margin: auto;
 }
 
+.link {
+  text-decoration: none;
+  color: black;
+}
+
 .button {
   background: red;
   color: white;
   font-size: 20px;
+  .link {
+    color: white;
+  }
 }
 
 .button:hover {
