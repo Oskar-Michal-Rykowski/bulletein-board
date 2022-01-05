@@ -6,7 +6,6 @@ import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 import FormControl from "@material-ui/core/FormControl";
 import Button from "@material-ui/core/Button";
-
 import { connect } from "react-redux";
 import { addPost } from "../../../redux/postsRedux";
 import { getUser } from "../../../redux/userRedux";
@@ -168,8 +167,4 @@ const PostAddContainer = connect(
   mapDispatchToProps
 )(Component);
 
-export {
-  // Component as PostAdd,
-  PostAddContainer as PostAdd,
-  Component as PostAddComponent,
-};
+export { PostAddContainer as PostAdd, Component as PostAddComponent };

@@ -1,109 +1,169 @@
 import React from "react";
 import PropTypes from "prop-types";
 import TextField from "@material-ui/core/TextField";
-import clsx from "clsx";
 import Container from "@material-ui/core/Container";
 import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 import FormControl from "@material-ui/core/FormControl";
 import Button from "@material-ui/core/Button";
-
 import { connect } from "react-redux";
+import { editPost, getAll, getOnePost } from "../../../redux/postsRedux";
 import { getUser } from "../../../redux/userRedux";
-import { getAll } from "../../../redux/postsRedux";
-// import { connect } from 'react-redux';
-// import { reduxSelector, reduxActionCreator } from '../../../redux/exampleRedux.js';
 
 import styles from "./PostEdit.module.scss";
 
-const Component = ({ className, children, user, posts }) => {
-  const url = window.location.href;
-  const urlElements = url.split("/");
-  const id = urlElements[urlElements.length - 2];
-  // console.log("id", id);
-  const post = posts.filter((article) => article.id === id)[0];
-  // console.log("post", post);
-  // console.log("pos.statust", post.status);
-  const [selection, setSelection] = React.useState(post.status);
-
-  const handleChange = (event) => {
-    setSelection(event.target.value);
+class Component extends React.Component {
+  state = {
+    editedPost: {
+      id: this.props.onePost.id,
+      title: this.props.onePost.title,
+      author: this.props.onePost.author,
+      publicationDate: this.props.onePost.publicationDate,
+      actualizationDate: this.props.onePost.actualizationDate,
+      status: this.props.onePost.status,
+      description: this.props.onePost.description,
+    },
   };
 
-  return (
-    <div className={clsx(className, styles.root)}>
-      <Container maxWidth="sm">
-        <h2>Edit</h2>
-        {children}
-        <form className={styles.form} noValidate autoComplete="off">
-          <div>
-            <TextField
-              className={styles.title}
-              id="outlined-multiline-flexible"
-              label="Title"
-              value={post.title}
-              multiline
-              maxRows={4}
-              inputProps={{ minLength: 10, maxLength: 100 }}
-            />
+  currentDate = () => {
+    const options = {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+      second: "numeric",
+    };
+    const today = new Date();
+    const time = today.toLocaleDateString("en-US", options);
+    console.log("time", time);
+    return time;
+  };
 
-            <TextField
-              className={styles.article}
-              id="outlined-multiline-static"
-              label="Article"
-              value={post.description}
-              multiline
-              rows={4}
-              inputProps={{ minLength: 25 }}
-              default
-            />
-            <FormControl className={styles.status}>
-              <InputLabel htmlFor="age-native-simple">Status</InputLabel>
-              <Select
-                native
-                value={selection}
-                onChange={handleChange}
-                inputProps={{
-                  name: "age",
-                  id: "age-native-simple",
-                }}
-              >
-                <option value="closed">Closed</option>
-                <option value="open">Open</option>
-              </Select>
-            </FormControl>
-            <Button className={styles.submit}>Add</Button>
-          </div>
-        </form>
-      </Container>
-    </div>
-  );
-};
+  updateField = ({ target }) => {
+    const { editedPost } = this.state;
+    const { value, name } = target;
+
+    this.setState({
+      editedPost: {
+        ...editedPost,
+        [name]: value,
+        actualizationDate: this.currentDate(),
+      },
+    });
+  };
+
+  setNewPost = (e) => {
+    const { editPost } = this.props;
+    const { editedPost } = this.state;
+    e.preventDefault();
+
+    //DLACZEGO TO NIE CHCE DZIAŁAĆ?
+    // this.setState({
+    //   newPost: {
+    //     ...newPost,
+    //     publicationDate: this.currentDate(),
+    // actualizationDate: this.currentDate(),
+    // id: this.getRandomId(),
+    //   },
+    // });
+    // console.log("onePost", this.props.onePost[0]);
+    editPost(editedPost);
+    alert(`Success!`);
+  };
+
+  render() {
+    const { editedPost } = this.state;
+
+    return (
+      <div className={styles.root}>
+        <Container maxWidth="sm">
+          <h2>PostEdit</h2>
+
+          <form
+            className={styles.form}
+            onSubmit={this.setNewPost}
+            noValidate
+            autoComplete="off"
+          >
+            <div>
+              <TextField
+                className={styles.title}
+                id="title-textfield"
+                name="title"
+                label="Title"
+                value={editedPost.title}
+                multiline
+                maxRows={4}
+                inputProps={{ minLength: 10, maxLength: 100 }}
+                onChange={this.updateField}
+              />
+              <TextField
+                className={styles.article}
+                id="article-textfield"
+                name="description"
+                label="Article"
+                value={editedPost.description}
+                multiline
+                rows={4}
+                inputProps={{ minLength: 25 }}
+                default
+                onChange={this.updateField}
+              />
+              <FormControl className={styles.status}>
+                <InputLabel htmlFor="age-native-simple">Status</InputLabel>
+                <Select
+                  native
+                  name="status"
+                  value={editedPost.status}
+                  onChange={this.updateField}
+                >
+                  <option aria-label="None" value="" />
+                  <option>Open</option>
+                  <option>Closed</option>
+                </Select>
+              </FormControl>
+              <Button type="submit" className={styles.submit}>
+                Add
+              </Button>
+            </div>
+          </form>
+        </Container>
+      </div>
+    );
+  }
+}
 
 Component.propTypes = {
+  onePost: PropTypes.object,
   children: PropTypes.node,
   className: PropTypes.string,
+  posts: PropTypes.array,
+  editPost: PropTypes.func,
   user: PropTypes.shape({
     name: PropTypes.string,
     logged: PropTypes.bool,
     position: PropTypes.string,
   }),
-  posts: PropTypes.array,
 };
+
+const url = window.location.href;
+const urlElements = url.split("/");
+const id = urlElements[urlElements.length - 2];
 
 const mapStateToProps = (state) => ({
   user: getUser(state),
   posts: getAll(state),
+  onePost: getOnePost(state, id),
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  // someAction: arg => dispatch(reduxActionCreator(arg)),
+  editPost: (post) => dispatch(editPost(post)),
 });
 
-const PostContainer = connect(mapStateToProps, mapDispatchToProps)(Component);
+const PostEditContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Component);
 
-export {
-  // Component as PostEdit,
-  PostContainer as PostEdit,
-  Component as PostEditComponent,
-};
+export { PostEditContainer as PostEdit, Component as PostEditComponent };
