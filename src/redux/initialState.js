@@ -4,7 +4,7 @@ export const initialState = {
       {
         id: "1",
         title: "Sprzedam Passata",
-        author: "Anna Manna",
+        author: "Oskar",
         publicationDate: "11.12.2022",
         actualizationDate: "12.12.2022",
         status: "closed",
@@ -37,5 +37,9 @@ export const initialState = {
       error: false,
     },
   },
-  user: "logout",
+  user: {
+    name: "Oskar",
+    logged: true,
+    position: "Admin",
+  },
 };

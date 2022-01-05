@@ -9,6 +9,7 @@ import Button from "@material-ui/core/Button";
 
 import { connect } from "react-redux";
 import { addPost } from "../../../redux/postsRedux";
+import { getUser } from "../../../redux/userRedux";
 
 import styles from "./PostAdd.module.scss";
 
@@ -17,7 +18,7 @@ class Component extends React.Component {
     newPost: {
       id: "5",
       title: "",
-      author: "Oskar",
+      author: this.props.user.name,
       description: "",
       status: "",
       publicationDate: "05.01.2022",
@@ -103,9 +104,12 @@ Component.propTypes = {
   className: PropTypes.string,
   posts: PropTypes.array,
   addPost: PropTypes.func,
+  user: PropTypes.objectOf(PropTypes.string),
 };
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+  user: getUser(state),
+});
 
 const mapDispatchToProps = (dispatch) => ({
   addPost: (post) => dispatch(addPost(post)),

@@ -18,7 +18,7 @@ import { Link } from "react-router-dom";
 const Component = ({ className, children, user, posts }) => (
   <div className={clsx(className, styles.root)}>
     <Container maxWidth="sm">
-      {user === "logged" ? (
+      {user.logged ? (
         <div className={styles.head}>
           <Button className={styles.button}>
             <Link className={styles.link} to="/post/add">
@@ -59,7 +59,7 @@ const Component = ({ className, children, user, posts }) => (
 Component.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
-  user: PropTypes.string,
+  user: PropTypes.objectOf(PropTypes.string),
   posts: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.number)),
 };
 

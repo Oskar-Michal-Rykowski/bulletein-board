@@ -21,7 +21,7 @@ const Component = ({ className, user }) => (
           Login
         </Typography>
       </CardContent>
-      {user === "logged" ? (
+      {user.logged ? (
         <div>
           <Typography className={styles.articles} variant="h5" component="h2">
             <Link to="/"> See your articles </Link>
@@ -45,7 +45,7 @@ const Component = ({ className, user }) => (
 Component.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
-  user: PropTypes.string,
+  user: PropTypes.objectOf(PropTypes.string),
 };
 
 const mapStateToProps = (state) => ({

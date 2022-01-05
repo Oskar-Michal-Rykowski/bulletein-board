@@ -21,6 +21,9 @@ const Component = ({ className, children, user, posts }) => {
   const url = window.location.href;
   const id = url.substring(url.lastIndexOf("/") + 1);
   const post = posts.filter((article) => article.id === id)[0];
+  const isEditable =
+    (user.logged && user.position === "Admin") ||
+    (user.logged && post.author === user.name);
 
   return (
     <div className={clsx(className, styles.root)}>
@@ -48,7 +51,7 @@ const Component = ({ className, children, user, posts }) => {
             <Button size="small" color="primary">
               Actualization date: {post.actualizationDate}
             </Button>
-            {user === "logged" ? (
+            {isEditable ? (
               <Button size="small">
                 <Link className={styles.edit} to={`${post.id}/edit`}>
                   EDIT
@@ -66,7 +69,7 @@ const Component = ({ className, children, user, posts }) => {
 Component.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
-  user: PropTypes.string,
+  user: PropTypes.objectOf(PropTypes.string),
   posts: PropTypes.array,
 };
 

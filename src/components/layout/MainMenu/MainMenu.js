@@ -21,7 +21,7 @@ const Component = ({ className, children, user }) => (
       <Link to="/">Home</Link>
       <Link to="/login">Profile</Link>
 
-      {user === "logged" ? (
+      {user.logged ? (
         <Link to="/">Logout</Link>
       ) : (
         <Link to="/login">Login</Link>
@@ -33,7 +33,7 @@ const Component = ({ className, children, user }) => (
 Component.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
-  user: PropTypes.string,
+  user: PropTypes.objectOf(PropTypes.string),
 };
 
 const mapStateToProps = (state) => ({

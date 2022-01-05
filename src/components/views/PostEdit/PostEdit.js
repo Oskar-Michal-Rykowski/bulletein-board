@@ -83,7 +83,7 @@ const Component = ({ className, children, user, posts }) => {
 Component.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
-  user: PropTypes.string,
+  user: PropTypes.objectOf(PropTypes.string),
   posts: PropTypes.array,
 };
 
