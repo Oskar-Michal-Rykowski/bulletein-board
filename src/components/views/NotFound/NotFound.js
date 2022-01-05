@@ -21,6 +21,9 @@ const Component = ({ className, children }) => (
         </Typography>
       </CardContent>
     </Card>
+    <Typography className={styles.home} variant="h5" component="h2">
+      <a href="/">Home</a>
+    </Typography>
   </div>
 );
 

@@ -1,4 +1,10 @@
-@import '../../../styles/settings.scss';
+@import "../../../styles/settings.scss";
 
-// .root {
-// }
+.card {
+  width: 100%;
+  margin: 50px;
+}
+
+.photo {
+  height: 300px;
+}

@@ -1,23 +1,53 @@
 @import "../../../styles/settings.scss";
 
-.panel {
-  width: 30%;
-  height: 170px;
+.head {
+  width: fit-content;
   margin: auto;
 }
 
-.title {
-  text-align: center;
-  margin: auto;
-}
-
-.google {
+.button {
   background: red;
   color: white;
   font-size: 20px;
-  margin: auto;
 }
 
-.google:hover {
+.button:hover {
   background: gray;
+}
+
+.list {
+  margin-top: 15px;
+
+  .card {
+    margin: 10px 0;
+
+    .content {
+      padding-bottom: 10px;
+
+      .author,
+      .date,
+      .more {
+        color: gray;
+        font-size: 13px;
+        margin: 5px 0;
+      }
+
+      .title {
+        margin: 5px 0;
+      }
+
+      .description {
+        margin: 10px 0;
+      }
+
+      .more {
+        padding-left: 0;
+      }
+
+      .more:hover {
+        color: orange;
+        background: none;
+      }
+    }
+  }
 }
