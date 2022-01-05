@@ -5,17 +5,14 @@ import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
-
 import clsx from "clsx";
-
 import { connect } from "react-redux";
 import { getUser } from "../../../redux/userRedux";
 import { getAll } from "../../../redux/postsRedux";
-
 import styles from "./YourPosts.module.scss";
 import { Link } from "react-router-dom";
 
-const Component = ({ className, children, user, posts }) => {
+const Component = ({ className, user, posts }) => {
   let yourPosts = posts.filter((post) => post.author === user.name);
   const postsByDate = yourPosts.sort(function (a, b) {
     return new Date(b.publicationDate) - new Date(a.publicationDate);
@@ -68,7 +65,6 @@ const Component = ({ className, children, user, posts }) => {
 };
 
 Component.propTypes = {
-  children: PropTypes.node,
   className: PropTypes.string,
   user: PropTypes.shape({
     name: PropTypes.string,
@@ -92,8 +88,4 @@ const YourPostsContainer = connect(
   mapDispatchToProps
 )(Component);
 
-export {
-  // Component as YourPosts,
-  YourPostsContainer as YourPosts,
-  Component as YourPostsComponent,
-};
+export { YourPostsContainer as YourPosts, Component as YourPostsComponent };

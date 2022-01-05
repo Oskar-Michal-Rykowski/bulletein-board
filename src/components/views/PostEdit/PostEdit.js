@@ -78,7 +78,7 @@ class Component extends React.Component {
     return (
       <div className={styles.root}>
         <Container maxWidth="sm">
-          <h2>PostEdit</h2>
+          <h2>Edit the post</h2>
 
           <form
             className={styles.form}
@@ -136,7 +136,6 @@ class Component extends React.Component {
 
 Component.propTypes = {
   onePost: PropTypes.object,
-  children: PropTypes.node,
   className: PropTypes.string,
   posts: PropTypes.array,
   editPost: PropTypes.func,

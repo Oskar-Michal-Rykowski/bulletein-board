@@ -1,18 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
-
 import Breadcrumbs from "@material-ui/core/Breadcrumbs";
-
 import { connect } from "react-redux";
 import { getUser } from "../../../redux/userRedux";
-
-// import { connect } from 'react-redux';
-// import { reduxSelector, reduxActionCreator } from '../../../redux/exampleRedux.js';
-
 import styles from "./MainMenu.module.scss";
 import { Link } from "react-router-dom";
 
-const Component = ({ className, children, user }) => (
+const Component = ({ user }) => (
   <div className={styles.header}>
     <Link className={styles.brand} to="/">
       Bulletein App
@@ -31,7 +25,6 @@ const Component = ({ className, children, user }) => (
 );
 
 Component.propTypes = {
-  children: PropTypes.node,
   className: PropTypes.string,
   user: PropTypes.shape({
     name: PropTypes.string,

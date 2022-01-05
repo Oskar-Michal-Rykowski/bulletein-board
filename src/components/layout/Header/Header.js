@@ -6,10 +6,8 @@ import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import clsx from "clsx";
-
 import { connect } from "react-redux";
 import { getUser } from "../../../redux/userRedux";
-
 import styles from "./Header.module.scss";
 import { Link } from "react-router-dom";
 
@@ -43,7 +41,6 @@ const Component = ({ className, user }) => (
 );
 
 Component.propTypes = {
-  children: PropTypes.node,
   className: PropTypes.string,
   user: PropTypes.shape({
     name: PropTypes.string,
@@ -60,7 +57,6 @@ const mapDispatchToProps = (dispatch) => ({
   // someAction: arg => dispatch(reduxActionCreator(arg)),
 });
 
-// const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
 const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
 
 export { Container as Header, Component as HeaderComponent };

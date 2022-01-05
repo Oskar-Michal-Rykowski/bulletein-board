@@ -15,7 +15,7 @@ import { getAll } from "../../../redux/postsRedux";
 import styles from "./Homepage.module.scss";
 import { Link } from "react-router-dom";
 
-const Component = ({ className, children, user, posts }) => {
+const Component = ({ className, user, posts }) => {
   const postsByDate = posts.sort(function (a, b) {
     return new Date(b.publicationDate) - new Date(a.publicationDate);
   });
@@ -67,7 +67,6 @@ const Component = ({ className, children, user, posts }) => {
 };
 
 Component.propTypes = {
-  children: PropTypes.node,
   className: PropTypes.string,
   user: PropTypes.shape({
     name: PropTypes.string,
@@ -91,8 +90,4 @@ const HomepageContainer = connect(
   mapDispatchToProps
 )(Component);
 
-export {
-  // Component as Homepage,
-  HomepageContainer as Homepage,
-  Component as HomepageComponent,
-};
+export { HomepageContainer as Homepage, Component as HomepageComponent };

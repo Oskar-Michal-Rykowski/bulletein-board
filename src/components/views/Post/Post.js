@@ -7,17 +7,14 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-
 import clsx from "clsx";
-
 import { connect } from "react-redux";
 import { getUser } from "../../../redux/userRedux";
 import { getAll } from "../../../redux/postsRedux";
-
 import styles from "./Post.module.scss";
 import { Link } from "react-router-dom";
 
-const Component = ({ className, children, user, posts }) => {
+const Component = ({ className, user, posts }) => {
   const url = window.location.href;
   const id = url.substring(url.lastIndexOf("/") + 1);
   const post = posts.filter((article) => article.id === id)[0];
@@ -27,8 +24,6 @@ const Component = ({ className, children, user, posts }) => {
 
   return (
     <div className={clsx(className, styles.root)}>
-      <h2>Post</h2>
-      {children}
       <Container maxWidth="md">
         <Card className={styles.card}>
           <CardActionArea>
@@ -67,7 +62,6 @@ const Component = ({ className, children, user, posts }) => {
   );
 };
 Component.propTypes = {
-  children: PropTypes.node,
   className: PropTypes.string,
   user: PropTypes.shape({
     name: PropTypes.string,
