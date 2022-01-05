@@ -24,7 +24,7 @@ const Component = ({ className, user }) => (
       {user.logged ? (
         <div>
           <Typography className={styles.articles} variant="h5" component="h2">
-            <Link to="/"> See your articles </Link>
+            <Link to="/yourposts"> See your articles </Link>
           </Typography>
 
           <Typography className={styles.logout} variant="h5" component="h2">
@@ -45,7 +45,11 @@ const Component = ({ className, user }) => (
 Component.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
-  user: PropTypes.objectOf(PropTypes.string),
+  user: PropTypes.shape({
+    name: PropTypes.string,
+    logged: PropTypes.bool,
+    position: PropTypes.string,
+  }),
 };
 
 const mapStateToProps = (state) => ({

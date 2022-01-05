@@ -5,7 +5,7 @@ export const initialState = {
         id: "1",
         title: "Sprzedam Passata",
         author: "Oskar",
-        publicationDate: "11.12.2022",
+        publicationDate: "Mar 12 2012 10:00:00 AM",
         actualizationDate: "12.12.2022",
         status: "closed",
         description:
@@ -15,7 +15,7 @@ export const initialState = {
         id: "2",
         title: "Sprzedam Dom",
         author: "Tomasz Bodnar",
-        publicationDate: "11.12.2022",
+        publicationDate: "Mar 13 2013 10:00:00 AM",
         actualizationDate: "12.12.2022",
         status: "open",
         description:
@@ -25,7 +25,7 @@ export const initialState = {
         id: "3",
         title: "Sprzedam Telefon",
         author: "Karlo Kowalski",
-        publicationDate: "11.12.2022",
+        publicationDate: "Mar 13 2012 10:00:00 AM",
         actualizationDate: "12.12.2022",
         status: "open",
         description:

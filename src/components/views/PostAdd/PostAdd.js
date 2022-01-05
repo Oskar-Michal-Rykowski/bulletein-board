@@ -21,24 +21,68 @@ class Component extends React.Component {
       author: this.props.user.name,
       description: "",
       status: "",
-      publicationDate: "05.01.2022",
+      publicationDate: "",
       actualizationDate: "06.01.2022",
     },
+  };
+
+  currentDate = () => {
+    const options = {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+      second: "numeric",
+    };
+    const today = new Date();
+    const time = today.toLocaleDateString("en-US", options);
+    console.log("time", time);
+    return time;
+  };
+
+  getRandomId = () => {
+    let min = 1;
+    let max = 999999999;
+    const minimum = Math.ceil(min);
+    const maximum = Math.floor(max);
+    const newId =
+      Math.floor(Math.random() * (maximum - minimum)) + minimum + "";
+    return newId;
   };
 
   updateField = ({ target }) => {
     const { newPost } = this.state;
     const { value, name } = target;
 
-    this.setState({ newPost: { ...newPost, [name]: value } });
+    this.setState({
+      newPost: {
+        ...newPost,
+        [name]: value,
+        publicationDate: this.currentDate(),
+        actualizationDate: this.currentDate(),
+        id: this.getRandomId(),
+      },
+    });
   };
 
   setNewPost = (e) => {
     const { addPost } = this.props;
     const { newPost } = this.state;
     e.preventDefault();
+
+    //DLACZEGO TO NIE CHCE DZIAŁAĆ?
+    // this.setState({
+    //   newPost: {
+    //     ...newPost,
+    //     publicationDate: this.currentDate(),
+    // actualizationDate: this.currentDate(),
+    // id: this.getRandomId(),
+    //   },
+    // });
+
     addPost(newPost);
-    alert("Success!");
+    alert(`Success!`);
   };
 
   render() {
@@ -104,7 +148,11 @@ Component.propTypes = {
   className: PropTypes.string,
   posts: PropTypes.array,
   addPost: PropTypes.func,
-  user: PropTypes.objectOf(PropTypes.string),
+  user: PropTypes.shape({
+    name: PropTypes.string,
+    logged: PropTypes.bool,
+    position: PropTypes.string,
+  }),
 };
 
 const mapStateToProps = (state) => ({

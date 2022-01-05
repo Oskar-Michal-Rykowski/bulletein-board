@@ -1,0 +1,61 @@
+@import "../../../styles/settings.scss";
+
+.head {
+  width: fit-content;
+  margin: auto;
+}
+
+.link {
+  text-decoration: none;
+  color: black;
+}
+
+.button {
+  background: red;
+  color: white;
+  font-size: 20px;
+  .link {
+    color: white;
+  }
+}
+
+.button:hover {
+  background: gray;
+}
+
+.list {
+  margin-top: 15px;
+
+  .card {
+    margin: 10px 0;
+
+    .content {
+      padding-bottom: 10px;
+
+      .author,
+      .date,
+      .more {
+        color: gray;
+        font-size: 13px;
+        margin: 5px 0;
+      }
+
+      .title {
+        margin: 5px 0;
+      }
+
+      .description {
+        margin: 10px 0;
+      }
+
+      .more {
+        padding-left: 0;
+      }
+
+      .more:hover {
+        color: orange;
+        background: none;
+      }
+    }
+  }
+}

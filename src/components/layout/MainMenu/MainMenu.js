@@ -33,7 +33,11 @@ const Component = ({ className, children, user }) => (
 Component.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
-  user: PropTypes.objectOf(PropTypes.string),
+  user: PropTypes.shape({
+    name: PropTypes.string,
+    logged: PropTypes.bool,
+    position: PropTypes.string,
+  }),
 };
 
 const mapStateToProps = (state) => ({
