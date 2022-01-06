@@ -7,7 +7,7 @@ import Select from "@material-ui/core/Select";
 import FormControl from "@material-ui/core/FormControl";
 import Button from "@material-ui/core/Button";
 import { connect } from "react-redux";
-import { editPost, getAll, getOnePost } from "../../../redux/postsRedux";
+import { editPost, getOnePost } from "../../../redux/postsRedux";
 import { getUser } from "../../../redux/userRedux";
 
 import styles from "./PostEdit.module.scss";
@@ -16,13 +16,7 @@ import { NotFound } from "../NotFound/NotFound";
 class Component extends React.Component {
   state = {
     editedPost: {
-      id: this.props.onePost.id,
-      title: this.props.onePost.title,
-      author: this.props.onePost.author,
-      publicationDate: this.props.onePost.publicationDate,
-      actualizationDate: this.props.onePost.actualizationDate,
-      status: this.props.onePost.status,
-      description: this.props.onePost.description,
+      ...this.props.onePost,
     },
   };
 
@@ -145,7 +139,6 @@ class Component extends React.Component {
 Component.propTypes = {
   onePost: PropTypes.object,
   className: PropTypes.string,
-  posts: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)),
   editPost: PropTypes.func,
   user: PropTypes.shape({
     name: PropTypes.string,
@@ -156,7 +149,6 @@ Component.propTypes = {
 
 const mapStateToProps = (state, ownProps) => ({
   user: getUser(state),
-  posts: getAll(state),
   onePost: getOnePost(state, ownProps.match.params.id),
 });
 
