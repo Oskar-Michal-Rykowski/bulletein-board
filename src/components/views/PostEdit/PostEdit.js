@@ -13,40 +13,16 @@ import { getUser } from "../../../redux/userRedux";
 import styles from "./PostEdit.module.scss";
 
 class Component extends React.Component {
-  constructor(props) {
-    super(props);
-    this.setState(this.getPostfromLink());
-  }
   state = {
     editedPost: {
-      id: "",
-      title: "",
-      author: "",
-      publicationDate: " ",
-      actualizationDate: "",
-      status: "",
-      description: "",
+      id: this.props.onePost.id,
+      title: this.props.onePost.title,
+      author: this.props.onePost.author,
+      publicationDate: this.props.onePost.publicationDate,
+      actualizationDate: this.props.onePost.actualizationDate,
+      status: this.props.onePost.status,
+      description: this.props.onePost.description,
     },
-  };
-
-  getPostfromLink = () => {
-    const url = window.location.href;
-    const urlElements = url.split("/");
-    const id = urlElements[urlElements.length - 2];
-    const postContent = this.props.posts.filter(
-      (article) => article.id === id
-    )[0];
-    console.log("post", postContent);
-    return postContent;
-    // this.setState({
-    //   id: postContent.id,
-    //   title: postContent.title,
-    //   author: postContent.author,
-    //   publicationDate: postContent.publicationDate,
-    //   actualizationDate: postContent.actualizationDate,
-    //   status: postContent.status,
-    //   description: postContent.description,
-    // });
   };
 
   currentDate = () => {
@@ -98,8 +74,7 @@ class Component extends React.Component {
 
   render() {
     const { editedPost } = this.state;
-    // console.log("post", this.props.onePost);
-    // console.log("post", this.postContent);
+
     return (
       <div className={styles.root}>
         <Container maxWidth="sm">
@@ -171,17 +146,13 @@ Component.propTypes = {
   }),
 };
 
-// const url = window.location.href;
-// const urlElements = url.split("/");
-// const id = urlElements[urlElements.length - 2];
-
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state, ownProps) => ({
   user: getUser(state),
   posts: getAll(state),
+  onePost: getOnePost(state, ownProps.match.params.id),
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  // onePost: (state, id) => dispatch(getOnePost(state, id)),
   editPost: (post) => dispatch(editPost(post)),
 });
 
