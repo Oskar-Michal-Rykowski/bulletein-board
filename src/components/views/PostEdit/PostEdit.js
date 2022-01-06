@@ -42,16 +42,15 @@ class Component extends React.Component {
   };
 
   updateField = ({ target }) => {
-    const { editedPost } = this.state;
     const { value, name } = target;
 
-    this.setState({
+    this.setState((prevState) => ({
       editedPost: {
-        ...editedPost,
+        ...prevState.editedPost,
         [name]: value,
         actualizationDate: this.currentDate(),
       },
-    });
+    }));
   };
 
   setNewPost = (e) => {
