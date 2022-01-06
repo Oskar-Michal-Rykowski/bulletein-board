@@ -74,7 +74,7 @@ class Component extends React.Component {
 
   render() {
     const { editedPost } = this.state;
-
+    console.log("post", this.props.onePost);
     return (
       <div className={styles.root}>
         <Container maxWidth="sm">

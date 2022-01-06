@@ -15,13 +15,13 @@ import styles from "./PostAdd.module.scss";
 class Component extends React.Component {
   state = {
     newPost: {
-      id: "5",
+      id: "",
       title: "",
       author: this.props.user.name,
       description: "",
       status: "",
       publicationDate: "",
-      actualizationDate: "06.01.2022",
+      actualizationDate: "",
     },
   };
 
