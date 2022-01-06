@@ -38,8 +38,25 @@ export const initialState = {
     },
   },
   user: {
-    name: "Oskar",
-    logged: true,
-    position: "Admin",
+    name: "Not logged",
+    logged: false,
+    position: "User",
   },
+  users: [
+    {
+      name: "Admin",
+      logged: true,
+      position: "Admin",
+    },
+    {
+      name: "Random User",
+      logged: true,
+      position: "User",
+    },
+    {
+      name: "Not logged",
+      logged: false,
+      position: "User",
+    },
+  ],
 };
