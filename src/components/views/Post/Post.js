@@ -68,7 +68,7 @@ Component.propTypes = {
     logged: PropTypes.bool,
     position: PropTypes.string,
   }),
-  posts: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)),
+  posts: PropTypes.array,
 };
 
 const mapStateToProps = (state) => ({
@@ -83,3 +83,98 @@ const mapDispatchToProps = (dispatch) => ({
 const PostContainer = connect(mapStateToProps, mapDispatchToProps)(Component);
 
 export { PostContainer as Post, Component as PostComponent };
+
+// import React from "react";
+// import PropTypes from "prop-types";
+// import Container from "@material-ui/core/Container";
+// import Card from "@material-ui/core/Card";
+// import CardActionArea from "@material-ui/core/CardActionArea";
+// import CardActions from "@material-ui/core/CardActions";
+// import CardContent from "@material-ui/core/CardContent";
+// import Button from "@material-ui/core/Button";
+// import Typography from "@material-ui/core/Typography";
+// import { connect } from "react-redux";
+// import { getUser } from "../../../redux/userRedux";
+// import { getAll, getOnePost } from "../../../redux/postsRedux";
+// import styles from "./Post.module.scss";
+// import { Link } from "react-router-dom";
+
+// class Component extends React.Component {
+//   // const url = window.location.href;
+//   // const id = url.substring(url.lastIndexOf("/") + 1);
+//   // const post = posts.filter((article) => article.id === id)[0];
+//   render() {
+//     const { onePost, user } = this.props;
+//     console.log(onePost);
+//     const isEditable =
+//       (user.logged && user.position === "Admin") ||
+//       (user.logged && onePost.author === user.name);
+
+//     return (
+//       <div>
+//         <Container maxWidth="md">
+//           <Card className={styles.card}>
+//             <CardActionArea>
+//               <CardContent>
+//                 <Typography gutterBottom variant="h5" component="h2">
+//                   {onePost.title}
+//                 </Typography>
+//                 <Typography variant="body2" color="textSecondary" component="p">
+//                   {onePost.description}
+//                 </Typography>
+//               </CardContent>
+//             </CardActionArea>
+//             <CardActions>
+//               <Button size="small" color="primary">
+//                 {onePost.author}
+//               </Button>
+//               <Button size="small" color="primary">
+//                 Publication date: {onePost.publicationDate}
+//               </Button>
+//               <Button size="small" color="primary">
+//                 Actualization date: {onePost.actualizationDate}
+//               </Button>
+//               {isEditable ? (
+//                 <Button size="small">
+//                   <Link className={styles.edit} to={`${onePost.id}/edit`}>
+//                     EDIT
+//                   </Link>
+//                 </Button>
+//               ) : (
+//                 <div></div>
+//               )}
+//             </CardActions>
+//           </Card>
+//         </Container>
+//       </div>
+//     );
+//   }
+// }
+// Component.propTypes = {
+//   onePost: PropTypes.object,
+//   className: PropTypes.string,
+//   posts: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)),
+//   user: PropTypes.shape({
+//     name: PropTypes.string,
+//     logged: PropTypes.bool,
+//     position: PropTypes.string,
+//   }),
+// };
+
+// const url = window.location.href;
+// const urlElements = url.split("/");
+// const id = urlElements[urlElements.length - 2];
+
+// const mapStateToProps = (state) => ({
+//   user: getUser(state),
+//   posts: getAll(state),
+//   onePost: getOnePost(state, id),
+// });
+
+// const mapDispatchToProps = (dispatch) => ({
+//   // editPost: (post) => dispatch(editPost(post)),
+// });
+
+// const PostContainer = connect(mapStateToProps, mapDispatchToProps)(Component);
+
+// export { PostContainer as Post, Component as PostComponent };
