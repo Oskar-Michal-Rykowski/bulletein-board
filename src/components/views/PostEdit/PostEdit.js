@@ -11,6 +11,7 @@ import { editPost, getAll, getOnePost } from "../../../redux/postsRedux";
 import { getUser } from "../../../redux/userRedux";
 
 import styles from "./PostEdit.module.scss";
+import { NotFound } from "../NotFound/NotFound";
 
 class Component extends React.Component {
   state = {
@@ -74,63 +75,71 @@ class Component extends React.Component {
 
   render() {
     const { editedPost } = this.state;
+    const { user } = this.props;
+    const isEditable =
+      (user.logged && user.position === "Admin") ||
+      (user.logged && editedPost.author === user.name);
 
-    return (
-      <div className={styles.root}>
-        <Container maxWidth="sm">
-          <h2>Edit the post</h2>
+    if (isEditable) {
+      return (
+        <div className={styles.root}>
+          <Container maxWidth="sm">
+            <h2>Edit the post</h2>
 
-          <form
-            className={styles.form}
-            onSubmit={this.setNewPost}
-            noValidate
-            autoComplete="off"
-          >
-            <div>
-              <TextField
-                className={styles.title}
-                id="title-textfield"
-                name="title"
-                label="Title"
-                value={editedPost.title}
-                multiline
-                maxRows={4}
-                inputProps={{ minLength: 10, maxLength: 100 }}
-                onChange={this.updateField}
-              />
-              <TextField
-                className={styles.article}
-                id="article-textfield"
-                name="description"
-                label="Article"
-                value={editedPost.description}
-                multiline
-                rows={4}
-                inputProps={{ minLength: 25 }}
-                default
-                onChange={this.updateField}
-              />
-              <FormControl className={styles.status}>
-                <InputLabel htmlFor="age-native-simple">Status</InputLabel>
-                <Select
-                  native
-                  name="status"
-                  value={editedPost.status}
+            <form
+              className={styles.form}
+              onSubmit={this.setNewPost}
+              noValidate
+              autoComplete="off"
+            >
+              <div>
+                <TextField
+                  className={styles.title}
+                  id="title-textfield"
+                  name="title"
+                  label="Title"
+                  value={editedPost.title}
+                  multiline
+                  maxRows={4}
+                  inputProps={{ minLength: 10, maxLength: 100 }}
                   onChange={this.updateField}
-                >
-                  <option aria-label="None" value="" />
-                  <option>Open</option>
-                  <option>Closed</option>
-                </Select>
-              </FormControl>
-              <Button type="submit" className={styles.submit}>
-                Add
-              </Button>
-            </div>
-          </form>
-        </Container>
-      </div>
-    );
+                />
+                <TextField
+                  className={styles.article}
+                  id="article-textfield"
+                  name="description"
+                  label="Article"
+                  value={editedPost.description}
+                  multiline
+                  rows={4}
+                  inputProps={{ minLength: 25 }}
+                  default
+                  onChange={this.updateField}
+                />
+                <FormControl className={styles.status}>
+                  <InputLabel htmlFor="age-native-simple">Status</InputLabel>
+                  <Select
+                    native
+                    name="status"
+                    value={editedPost.status}
+                    onChange={this.updateField}
+                  >
+                    <option aria-label="None" value="" />
+                    <option>Open</option>
+                    <option>Closed</option>
+                  </Select>
+                </FormControl>
+                <Button type="submit" className={styles.submit}>
+                  Save
+                </Button>
+              </div>
+            </form>
+          </Container>
+        </div>
+      );
+    } else {
+      return <NotFound></NotFound>;
+    }
   }
 }
 
