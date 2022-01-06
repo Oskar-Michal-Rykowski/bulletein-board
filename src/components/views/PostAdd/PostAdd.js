@@ -144,7 +144,7 @@ class Component extends React.Component {
 
 Component.propTypes = {
   className: PropTypes.string,
-  posts: PropTypes.array,
+  posts: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)),
   addPost: PropTypes.func,
   user: PropTypes.shape({
     name: PropTypes.string,

@@ -73,7 +73,7 @@ Component.propTypes = {
     logged: PropTypes.bool,
     position: PropTypes.string,
   }),
-  posts: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.number)),
+  posts: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)),
 };
 
 const mapStateToProps = (state) => ({
