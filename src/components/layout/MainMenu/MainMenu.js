@@ -24,13 +24,6 @@ const Component = ({ user, users, changeUser }) => {
 
     const userData = users.filter((user) => user.name === username)[0];
 
-    // const userdata = {
-    //   name: event.target.value,
-    //   logged: true,
-    //   position: "Admin",
-    // };
-    // console.log("position", event.target.pos);
-
     changeUser(userData);
   };
 
