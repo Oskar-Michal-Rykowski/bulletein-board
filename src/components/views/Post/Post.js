@@ -10,14 +10,11 @@ import Typography from "@material-ui/core/Typography";
 import clsx from "clsx";
 import { connect } from "react-redux";
 import { getUser } from "../../../redux/userRedux";
-import { getAll } from "../../../redux/postsRedux";
+import { getPostById } from "../../../redux/postsRedux";
 import styles from "./Post.module.scss";
 import { Link } from "react-router-dom";
 
-const Component = ({ className, user, posts }) => {
-  const url = window.location.href;
-  const id = url.substring(url.lastIndexOf("/") + 1);
-  const post = posts.filter((article) => article.id === id)[0];
+const Component = ({ className, user, posts, post }) => {
   const isEditable =
     (user.logged && user.position === "Admin") ||
     (user.logged && post.author === user.name);
@@ -63,6 +60,7 @@ const Component = ({ className, user, posts }) => {
 };
 Component.propTypes = {
   className: PropTypes.string,
+  post: PropTypes.object,
   user: PropTypes.shape({
     name: PropTypes.string,
     logged: PropTypes.bool,
@@ -71,9 +69,9 @@ Component.propTypes = {
   posts: PropTypes.array,
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state, ownProps) => ({
   user: getUser(state),
-  posts: getAll(state),
+  post: getPostById(state, ownProps.match.params.id),
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -95,7 +93,7 @@ export { PostContainer as Post, Component as PostComponent };
 // import Typography from "@material-ui/core/Typography";
 // import { connect } from "react-redux";
 // import { getUser } from "../../../redux/userRedux";
-// import { getAll, getOnePost } from "../../../redux/postsRedux";
+// import { getAll, getPostById } from "../../../redux/postsRedux";
 // import styles from "./Post.module.scss";
 // import { Link } from "react-router-dom";
 
@@ -104,11 +102,11 @@ export { PostContainer as Post, Component as PostComponent };
 //   // const id = url.substring(url.lastIndexOf("/") + 1);
 //   // const post = posts.filter((article) => article.id === id)[0];
 //   render() {
-//     const { onePost, user } = this.props;
-//     console.log(onePost);
+//     const { post, user } = this.props;
+//     console.log(post);
 //     const isEditable =
 //       (user.logged && user.position === "Admin") ||
-//       (user.logged && onePost.author === user.name);
+//       (user.logged && post.author === user.name);
 
 //     return (
 //       <div>
@@ -117,26 +115,26 @@ export { PostContainer as Post, Component as PostComponent };
 //             <CardActionArea>
 //               <CardContent>
 //                 <Typography gutterBottom variant="h5" component="h2">
-//                   {onePost.title}
+//                   {post.title}
 //                 </Typography>
 //                 <Typography variant="body2" color="textSecondary" component="p">
-//                   {onePost.description}
+//                   {post.description}
 //                 </Typography>
 //               </CardContent>
 //             </CardActionArea>
 //             <CardActions>
 //               <Button size="small" color="primary">
-//                 {onePost.author}
+//                 {post.author}
 //               </Button>
 //               <Button size="small" color="primary">
-//                 Publication date: {onePost.publicationDate}
+//                 Publication date: {post.publicationDate}
 //               </Button>
 //               <Button size="small" color="primary">
-//                 Actualization date: {onePost.actualizationDate}
+//                 Actualization date: {post.actualizationDate}
 //               </Button>
 //               {isEditable ? (
 //                 <Button size="small">
-//                   <Link className={styles.edit} to={`${onePost.id}/edit`}>
+//                   <Link className={styles.edit} to={`${post.id}/edit`}>
 //                     EDIT
 //                   </Link>
 //                 </Button>
@@ -151,7 +149,7 @@ export { PostContainer as Post, Component as PostComponent };
 //   }
 // }
 // Component.propTypes = {
-//   onePost: PropTypes.object,
+//   post: PropTypes.object,
 //   className: PropTypes.string,
 //   posts: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)),
 //   user: PropTypes.shape({
@@ -168,7 +166,7 @@ export { PostContainer as Post, Component as PostComponent };
 // const mapStateToProps = (state) => ({
 //   user: getUser(state),
 //   posts: getAll(state),
-//   onePost: getOnePost(state, id),
+//   post: getPostById(state, id),
 // });
 
 // const mapDispatchToProps = (dispatch) => ({

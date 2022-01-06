@@ -52,7 +52,7 @@ describe("Component PostEdit", () => {
   };
   it("should render without crashing", () => {
     const component = shallow(
-      <PostEditComponent posts={mockPosts} onePost={mockPost} user={mockUser} />
+      <PostEditComponent posts={mockPosts} post={mockPost} user={mockUser} />
     );
     expect(component).toBeTruthy();
   });
