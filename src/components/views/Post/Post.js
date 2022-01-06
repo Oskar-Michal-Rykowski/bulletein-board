@@ -14,7 +14,7 @@ import { getPostById } from "../../../redux/postsRedux";
 import styles from "./Post.module.scss";
 import { Link } from "react-router-dom";
 
-const Component = ({ className, user, posts, post }) => {
+const Component = ({ className, user, post }) => {
   const isEditable =
     (user.logged && user.position === "Admin") ||
     (user.logged && post.author === user.name);
