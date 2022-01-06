@@ -20,7 +20,7 @@ const Component = ({ className, user, posts }) => {
     return new Date(b.publicationDate) - new Date(a.publicationDate);
   });
 
-  console.log(postsByDate);
+  // console.log(postsByDate);
   return (
     <div className={clsx(className, styles.root)}>
       <Container maxWidth="sm">
@@ -36,7 +36,7 @@ const Component = ({ className, user, posts }) => {
           <div></div>
         )}
         <div className={styles.list}>
-          {posts.map((post) => (
+          {postsByDate.map((post) => (
             <Card key={post.id} className={styles.card}>
               <CardContent className={styles.content}>
                 <Typography className={styles.author}>
@@ -73,7 +73,7 @@ Component.propTypes = {
     logged: PropTypes.bool,
     position: PropTypes.string,
   }),
-  posts: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.number)),
+  posts: PropTypes.arrayOf(PropTypes.objectOf(PropTypes.string)),
 };
 
 const mapStateToProps = (state) => ({

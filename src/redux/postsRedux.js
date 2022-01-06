@@ -1,7 +1,9 @@
 /* selectors */
 export const getAll = ({ posts }) => posts.data;
-export const getOnePost = ({ posts }, id) =>
-  posts.data.filter((post) => post.id === id)[0];
+export const getPostById = ({ posts }, id) => {
+  const postArray = posts.data.filter((post) => post.id === id);
+  return postArray[0];
+};
 
 /* action name creator */
 const reducerName = "posts";
