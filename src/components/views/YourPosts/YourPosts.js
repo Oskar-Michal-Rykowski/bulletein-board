@@ -8,7 +8,7 @@ import Typography from "@material-ui/core/Typography";
 import clsx from "clsx";
 import { connect } from "react-redux";
 import { getUser } from "../../../redux/userRedux";
-import { getAll } from "../../../redux/postsRedux";
+import { fetchPublished, getAllPublished } from "../../../redux/postsRedux";
 import styles from "./YourPosts.module.scss";
 import { Link } from "react-router-dom";
 
@@ -76,11 +76,11 @@ Component.propTypes = {
 
 const mapStateToProps = (state) => ({
   user: getUser(state),
-  posts: getAll(state),
+  posts: getAllPublished(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  // someAction: arg => dispatch(reduxActionCreator(arg)),
+  fetchPublishedPosts: () => dispatch(fetchPublished()),
 });
 
 const YourPostsContainer = connect(
