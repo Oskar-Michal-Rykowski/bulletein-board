@@ -33,15 +33,17 @@ export const editPost = (payload) => ({
 /* thunk creators */
 export const fetchPublished = () => {
   return (dispatch, getState) => {
-    dispatch(fetchStarted());
-
-    Axios.get("http://localhost:8000/api/posts")
-      .then((res) => {
-        dispatch(fetchSuccess(res.data));
-      })
-      .catch((err) => {
-        dispatch(fetchError(err.message || true));
-      });
+    try {
+      const { posts } = getState();
+      if (!posts.data.length || posts.loading.active === false) {
+        dispatch(fetchStarted());
+        Axios.get("http://localhost:8000/api/posts").then((res) => {
+          dispatch(fetchSuccess(res.data));
+        });
+      }
+    } catch (err) {
+      dispatch(fetchError(err.message || true));
+    }
   };
 };
 
