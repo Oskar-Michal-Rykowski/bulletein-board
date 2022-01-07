@@ -2,10 +2,11 @@ import Axios from "axios";
 
 /* selectors */
 export const getAllPublished = ({ posts }) => posts.data;
-export const getPostById = ({ posts }, id) => {
-  const postArray = posts.data.filter((post) => post.id === id);
-  return postArray[0];
-};
+// export const getPostById = ({ posts }, id) => {
+//   const postArray = posts.data.filter((post) => post.id === id);
+//   return postArray[0];
+// };
+export const getPostById = ({ posts }) => posts.postData;
 
 /* action name creator */
 const reducerName = "posts";
@@ -18,6 +19,7 @@ const FETCH_ERROR = createActionName("FETCH_ERROR");
 
 const ADD_POST = createActionName("ADD_POST");
 const EDIT_POST = createActionName("EDIT_POST");
+const FETCH_POST_DATA = createActionName("FETCH_POST_DATA");
 
 /* action creators */
 export const fetchStarted = (payload) => ({ payload, type: FETCH_START });
@@ -25,10 +27,8 @@ export const fetchSuccess = (payload) => ({ payload, type: FETCH_SUCCESS });
 export const fetchError = (payload) => ({ payload, type: FETCH_ERROR });
 
 export const addPost = (payload) => ({ payload, type: ADD_POST });
-export const editPost = (payload) => ({
-  payload,
-  type: EDIT_POST,
-});
+export const editPost = (payload) => ({ payload, type: EDIT_POST });
+export const fetchPostData = (payload) => ({ payload, type: FETCH_POST_DATA });
 
 /* thunk creators */
 export const fetchPublished = () => {
@@ -44,6 +44,20 @@ export const fetchPublished = () => {
     } catch (err) {
       dispatch(fetchError(err.message || true));
     }
+  };
+};
+
+export const fetchPost = (id) => {
+  return (dispatch, getState) => {
+    dispatch(fetchStarted());
+
+    Axios.get(`http://localhost:8000/api/posts/${id}`)
+      .then((res) => {
+        dispatch(fetchPostData(res.data));
+      })
+      .catch((err) => {
+        dispatch(fetchError(err.message || true));
+      });
   };
 };
 
@@ -70,6 +84,16 @@ export const reducer = (statePart = [], action = {}) => {
       return {
         ...statePart,
         data: [...restPosts, action.payload],
+      };
+    }
+    case FETCH_POST_DATA: {
+      return {
+        ...statePart,
+        loading: {
+          active: false,
+          error: false,
+        },
+        postData: action.payload,
       };
     }
     case FETCH_START: {

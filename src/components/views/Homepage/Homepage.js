@@ -5,9 +5,7 @@ import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
-
 import clsx from "clsx";
-
 import { connect } from "react-redux";
 import { getUser } from "../../../redux/userRedux";
 import { fetchPublished, getAllPublished } from "../../../redux/postsRedux";
@@ -44,7 +42,7 @@ class Component extends React.Component {
           )}
           <div className={styles.list}>
             {postsByDate.map((post) => (
-              <Card key={post.id} className={styles.card}>
+              <Card key={post._id} className={styles.card}>
                 <CardContent className={styles.content}>
                   <Typography className={styles.author}>
                     Author: {post.author}
@@ -57,10 +55,10 @@ class Component extends React.Component {
                     {post.title}
                   </Typography>
                   <Typography className={styles.date}>
-                    Publication date: {post.publicationDate}
+                    Publication date: {post.created}
                   </Typography>
                   <Button className={styles.more} size="small">
-                    <Link className={styles.link} to={`post/${post.id}`}>
+                    <Link className={styles.link} to={`post/${post._id}`}>
                       Learn More
                     </Link>
                   </Button>
@@ -76,7 +74,7 @@ class Component extends React.Component {
 
 Component.propTypes = {
   className: PropTypes.string,
-  fetchPublishedPosts: PropTypes.node,
+  fetchPublishedPosts: PropTypes.func,
   user: PropTypes.shape({
     name: PropTypes.string,
     logged: PropTypes.bool,
