@@ -67,7 +67,7 @@ class Component extends React.Component {
                 </Button>
                 {isEditable ? (
                   <Button size="small">
-                    <Link className={styles.edit} to={`${onePost.id}/edit`}>
+                    <Link className={styles.edit} to={`${onePost._id}/edit`}>
                       EDIT
                     </Link>
                   </Button>
