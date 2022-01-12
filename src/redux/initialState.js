@@ -38,9 +38,9 @@ export const initialState = {
     },
   },
   user: {
-    name: "Not logged",
-    logged: false,
-    position: "User",
+    name: "Admin",
+    logged: true,
+    position: "Admin",
   },
   users: [
     {
